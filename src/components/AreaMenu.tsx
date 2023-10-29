@@ -1,19 +1,17 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { initAreaWithStatus, getSubArea } from "../store/modules/area";
-import { useSelector } from "../store";
+import { useAppDispatch, useAppSelector } from "../store";
 
 const AreaMenu = () => {
-  const dispatch = useDispatch();
-  //型定義を追加したカスタムセレクタ
-  const areaState = useSelector(state => state.area);
+  //型定義を追加したカスタムdispatch, selector
+  const dispatch = useAppDispatch();
+  const areaState = useAppSelector(state => state.area);
 
   useEffect(()=>{
     dispatch(initAreaWithStatus());
   },[]);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(e.target.value);
     dispatch(getSubArea(e.target.value));
   }
 

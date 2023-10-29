@@ -1,32 +1,22 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getAreaAPI } from "../../api/getWeatherAPI";
 import { current } from "@reduxjs/toolkit";
-import { areaArrayType, areaObjType, initStateType } from "../../types/weatherTypes";
+import { AreaInfo, areaArrayType, initAreaState } from "../../types/types";
 
-const initAreaWithStatus = createAsyncThunk(
+const initAreaWithStatus = createAsyncThunk<AreaInfo>(
   'area/get',
-  async (payload) => {
+  async (_payload) => {
     const response = await getAreaAPI();
     return response.data;
   }
 )
 
-const initState: initStateType = {
-  areaObj: {
-    centers: {},
-    offices: {}
-  },
-  areaArray:[],
-  subAreaArray:[],
-  status:''
-}
-
 const area = createSlice({
   name: 'area',
-  initialState: initState,
+  initialState: {...(new initAreaState())},
   reducers: {
     getSubArea(state, { type, payload }) {
-      const areaObj = current<initStateType>(state).areaObj
+      const areaObj = current<initAreaState>(state).areaObj
       const subAreaCode = areaObj.centers[payload].children
       const subAreaArray: Array<[string, string]> = subAreaCode.map((code: string)=> {
         return [code,areaObj.offices[code].name]

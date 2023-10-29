@@ -1,3 +1,4 @@
+import { Weathers, initWeatherState } from '../../types/types';
 import { createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import { getWeatherAPI } from "../../api/getWeatherAPI";
 
@@ -11,11 +12,7 @@ const getWeatherWithStatus = createAsyncThunk(
 
 const weather = createSlice({
   name: 'weather',
-  initialState:{
-    weathers: {},
-    areaNum: '011000',
-    status: ''
-  },
+  initialState: {...(new initWeatherState())},
   reducers: {}, //typescriptでは必須
   extraReducers: (builder) => {
     builder.addCase(getWeatherWithStatus.pending,(state)=>{

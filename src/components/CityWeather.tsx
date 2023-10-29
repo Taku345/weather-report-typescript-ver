@@ -1,10 +1,17 @@
 import { useSelector } from "react-redux";
+import { useAppSelector } from "../store";
 
 const CityWeather = () => {
-  const status = useSelector(state => state.weather.status);
-  const weathers = useSelector(state => state.weather.weathers);
+  const weatherState = useAppSelector(state => state.weather);
+  
+
+  const status = weatherState.status;
+  const weathers = weatherState.weathers;
+  // const weathers = useSelector(state => state.weather.weathers);
+  console.log(weathers)
   const timeArray = weathers[0]?.timeSeries[0].timeDefines;
-  let dateArray = []
+  
+  let dateArray: string[] = []
   if (timeArray) {
     dateArray = timeArray.map((time) => {
       return time.split("T")[0];
