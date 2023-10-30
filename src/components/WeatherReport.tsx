@@ -17,7 +17,7 @@ const WeatherReport: React.FC = () => {
       <div style={divStyle}>
         <p>
           気象庁のサーバーから地域区分と予報情報を取得し表示しています。<br />
-          使用言語など：TypeScript React Redux 気象庁API<br /><br />
+          使用言語など：TypeScript React Redux 気象庁API Github Vercel<br /><br />
           以下のURL、またはQRコードから実際のプログラムを閲覧できます。<br />
           <a href="https://github.com/Taku345/weather-report-typescript-ver/tree/master/src">
           https://github.com/Taku345/weather-report-typescript-ver/tree/master/src
